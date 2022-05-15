@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class SecretariaService {
@@ -40,7 +41,8 @@ public class SecretariaService {
     @Transactional
     public void updateStatus(Long id, Secretaria secretaria){
         if (id == secretaria.getId()) {
-            this.secretariaRepository.updateStatus(secretaria.getId());
+            LocalDateTime data = LocalDateTime.now();
+            this.secretariaRepository.updateStatus(secretaria.getId(), data);
         }
         else {
             throw new RuntimeException();

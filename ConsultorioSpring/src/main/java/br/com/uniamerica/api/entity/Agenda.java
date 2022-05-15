@@ -23,8 +23,12 @@ public class Agenda extends AbstractEntity {
     private Boolean encaixe;
 
     @ManyToOne
+    @Getter @Setter
+    @JoinColumn(name = "paciente")
     private Paciente paciente;
 
     @ManyToOne
+    @Getter @Setter
+    @JoinColumn(name = "medico")
     private Medico medico;
 }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,8 @@ public class EspecialidadeService {
     @Transactional
     public void updateStatus(Long id, Especialidade especialidade){
         if (id == especialidade.getId()) {
-            this.especialidadeRepository.updateStatus(especialidade.getId());
+            LocalDateTime data = LocalDateTime.now();
+            this.especialidadeRepository.updateStatus(especialidade.getId(), data);
         }
         else {
             throw new RuntimeException();

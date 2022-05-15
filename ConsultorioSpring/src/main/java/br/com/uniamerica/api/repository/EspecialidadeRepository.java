@@ -7,13 +7,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+
 @Repository
 public interface EspecialidadeRepository extends JpaRepository<Especialidade, Long> {
 
     @Modifying
     @Query("UPDATE Especialidade especialidade " +
-            "SET especialidade.excluido = now() " +
+            "SET especialidade.excluido = :data " +
             "WHERE especialidade.id = :especialidade")
-    public void updateStatus(@Param("especialidade") Long idEspecialidade);
+    public void updateStatus(@Param("especialidade") Long especialidade,
+                             @Param("data") LocalDateTime data);
 
 }

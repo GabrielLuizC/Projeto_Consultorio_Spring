@@ -3,10 +3,7 @@ package br.com.uniamerica.api.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,13 +24,16 @@ public class Historico extends AbstractEntity {
 
     @ManyToOne
     @Getter @Setter
+    @JoinColumn(name = "secretaria")
     private Secretaria secretaria;
 
     @ManyToOne
     @Getter @Setter
+    @JoinColumn(name = "paciente")
     private Paciente paciente;
 
     @ManyToOne
     @Getter @Setter
+    @JoinColumn(name = "agenda")
     private Agenda agenda;
 }

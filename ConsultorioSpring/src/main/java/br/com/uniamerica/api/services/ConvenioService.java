@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.uniamerica.api.repository.ConvenioRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -42,7 +43,8 @@ public class ConvenioService {
     @Transactional
     public void updateStatus(Long id, Convenio convenio){
         if (id == convenio.getId()) {
-            this.convenioRepository.updateStatus(convenio.getId());
+            LocalDateTime data = LocalDateTime.now();
+            this.convenioRepository.updateStatus(convenio.getId(), data);
         }
         else {
             throw new RuntimeException();
