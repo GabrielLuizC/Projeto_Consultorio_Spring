@@ -11,19 +11,20 @@ import java.time.LocalDateTime;
 public class Paciente extends Pessoa {
 
     @Getter @Setter
-    @Column(name="tipo_atendimento", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_atendimento", nullable = false, length = 20)
     private TipoAtendimento tipoAtendimento;
 
     @Getter @Setter
-    @Column(name="numero_cartao_convenio", nullable = false)
+    @Column(name = "numero_cartao_convenio", length = 20, unique = true)
     private String numeroCartaoConvenio;
 
     @Getter @Setter
-    @Column(name="data_vencimento", nullable = false)
+    @Column(name = "data_vencimento")
     private LocalDateTime dataVencimento;
 
-    @ManyToOne
     @Getter @Setter
-    @JoinColumn(name = "convenio")
+    @JoinColumn(name = "id_convenio")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Convenio convenio;
 }

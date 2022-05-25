@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,15 +15,16 @@ import java.time.LocalDateTime;
 public class Secretaria extends Pessoa {
 
     @Getter @Setter
-    @Column(name="salario", nullable = false)
+    @Digits(integer = 5, fraction = 3)
+    @Column(name = "salario", precision = 5, scale = 3,nullable = false)
     private BigDecimal salario;
 
     @Getter @Setter
-    @Column(name="data_contratacao", nullable = false)
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dataContratacao;
 
     @Getter @Setter
-    @Column(name="pis", nullable = false)
+    @Column(name = "pis", nullable = false, length = 20, unique = true)
     private String pis;
 
 }

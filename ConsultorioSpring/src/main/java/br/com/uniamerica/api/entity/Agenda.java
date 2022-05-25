@@ -11,24 +11,29 @@ import java.time.LocalDateTime;
 public class Agenda extends AbstractEntity {
 
     @Getter @Setter
-    @Column(name="status_agenda", nullable = false)
-    private StatusAgenda statusAgenda;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private StatusAgenda status;
 
     @Getter @Setter
-    @Column(name="data_agenda", nullable = false)
-    private LocalDateTime dataAgenda;
+    @Column(name = "data_de", nullable = false)
+    private LocalDateTime dataDe;
 
     @Getter @Setter
-    @Column(name="encaixe", nullable = false)
+    @Column(name = "data_ate", nullable = false)
+    private LocalDateTime dataAte;
+
+    @Getter @Setter
+    @Column(name = "encaixe", columnDefinition = "BOOLEAN DEFAULT FALSE", nullable = false)
     private Boolean encaixe;
 
-    @ManyToOne
     @Getter @Setter
-    @JoinColumn(name = "paciente")
+    @JoinColumn(name = "id_paciente", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Paciente paciente;
 
-    @ManyToOne
     @Getter @Setter
-    @JoinColumn(name = "medico")
+    @JoinColumn(name = "id_medico", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Medico medico;
 }

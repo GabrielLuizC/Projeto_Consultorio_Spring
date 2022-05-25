@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,7 +18,8 @@ public class Convenio extends AbstractEntity {
     private String nome;
 
     @Getter @Setter
-    @Column(name="valor", nullable = false)
+    @Digits(integer = 5, fraction = 3)
+    @Column(name = "valor", precision = 5, scale = 3, nullable = false)
     private BigDecimal valor;
 
 }

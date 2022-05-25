@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Especialidade extends AbstractEntity {
 
     @Getter @Setter
-    @Column(name="nome", nullable = false)
+    @Column(name = "nome", nullable = false, unique = true, length = 50)
     private String nome;
 
 }
