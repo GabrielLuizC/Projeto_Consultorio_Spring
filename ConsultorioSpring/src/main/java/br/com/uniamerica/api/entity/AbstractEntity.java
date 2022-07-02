@@ -26,22 +26,31 @@ public abstract class AbstractEntity {
     private LocalDateTime atualizado;
 
     @Getter @Setter
-    @Column(name = "excluido")
-    private LocalDateTime excluido;
+    @Column(name = "ativo", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean ativo;
 
+    /**
+     *
+     * @param id
+     */
     public AbstractEntity(Long id){
         this.id = id;
     }
 
+    /**
+     * Método executado antes da execução repository.save
+     */
     @PrePersist
     public void dataCadastro(){
         this.cadastro = LocalDateTime.now();
     }
 
+    /**
+     * Método executado antes da execução repository.update
+     */
     @PreUpdate
     public void dataAtualizacao(){
         this.atualizado = LocalDateTime.now();
-        this.excluido = null;
     }
 
 }

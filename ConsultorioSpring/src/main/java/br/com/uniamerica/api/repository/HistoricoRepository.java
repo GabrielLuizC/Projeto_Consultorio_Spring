@@ -11,10 +11,4 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface HistoricoRepository extends JpaRepository<Historico, Long> {
-    @Modifying
-    @Query("UPDATE Historico historico " +
-            "SET historico.excluido = :data " +
-            "WHERE historico.id = :historico")
-    public void updateStatus(@Param("historico") Long historico,
-                             @Param("data") LocalDateTime data);
 }

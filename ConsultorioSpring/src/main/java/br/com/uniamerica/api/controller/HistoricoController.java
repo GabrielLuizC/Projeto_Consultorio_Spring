@@ -17,17 +17,4 @@ import java.util.List;
 @RequestMapping("/api/historicos")
 public class HistoricoController {
 
-    @Autowired
-    public HistoricoRepository historicoRepository;
-
-    @GetMapping
-    public ResponseEntity<List<Historico>> listAllHistorico(){
-        return new ResponseEntity<>(historicoRepository.findAll(), HttpStatus.OK) ;
-    }
-
-    @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody Historico historico){
-        historicoRepository.save(historico);
-        return new ResponseEntity<>("Registro Cadastrado", HttpStatus.OK);
-    }
 }

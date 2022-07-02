@@ -1,42 +1,70 @@
 package br.com.uniamerica.api.controller;
 
 import br.com.uniamerica.api.entity.Paciente;
-import br.com.uniamerica.api.repository.PacienteRepository;
-import br.com.uniamerica.api.services.PacienteService;
+import br.com.uniamerica.api.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/pacientes")
 public class PacienteController {
 
     @Autowired
-    public PacienteRepository pacienteRepository;
+    private PacienteService pacienteService;
 
-    @Autowired
-    public PacienteService pacienteService;
+    @GetMapping("/{idPaciente}")
+    public ResponseEntity<Paciente> findById(
+            @PathVariable("idPaciente") Long idPaciente
+    ){
+        return ResponseEntity.ok().body(this.pacienteService.findById(idPaciente).get());
+    }
 
     @GetMapping
-    public ResponseEntity<List<Paciente>> listAllPacientes(){
-        List<Paciente> pacientes = pacienteRepository.findAll();
-        return new ResponseEntity<>(pacienteRepository.findAll(), HttpStatus.OK) ;
+    public ResponseEntity<Page<Paciente>> listByAllPage(
+            Pageable pageable
+    ){
+        return ResponseEntity.ok().body(this.pacienteService.findAll(pageable));
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastrar(@RequestBody Paciente paciente){
+    public ResponseEntity<?> insert(
+            @RequestBody Paciente paciente
+    ){
         try {
             this.pacienteService.insert(paciente);
-            return ResponseEntity.ok().build();
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e);
+            return ResponseEntity.ok().body("Paciente Cadastrado com Sucesso.");
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{idPaciente}")
+    public ResponseEntity<?> update(
+            @RequestBody Paciente paciente,
+            @PathVariable Long idPaciente
+    ){
+        try {
+            this.pacienteService.update(idPaciente, paciente);
+            return ResponseEntity.ok().body("Paciente Atualizado com Sucesso.");
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/status/{idPaciente}")
+    public ResponseEntity<?> updateStatus(
+            @RequestBody Paciente paciente,
+            @PathVariable Long idPaciente
+    ){
+        try {
+            this.pacienteService.updateStatus(idPaciente, paciente);
+            return ResponseEntity.ok().body("Paciente Desativado com Sucesso.");
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

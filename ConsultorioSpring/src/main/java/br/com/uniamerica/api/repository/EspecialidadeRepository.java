@@ -6,17 +6,12 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDateTime;
 
 @Repository
 public interface EspecialidadeRepository extends JpaRepository<Especialidade, Long> {
 
     @Modifying
-    @Query("UPDATE Especialidade especialidade " +
-            "SET especialidade.excluido = :data " +
-            "WHERE especialidade.id = :especialidade")
-    public void updateStatus(@Param("especialidade") Long especialidade,
-                             @Param("data") LocalDateTime data);
-
+    @Query("UPDATE Especialidade especialidade SET especialidade.ativo = false WHERE especialidade.id = :idEspecialidade")
+    public void desativar(@Param("idEspecialidade") Long idEspecialidade);
 }

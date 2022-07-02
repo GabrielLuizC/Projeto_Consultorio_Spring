@@ -66,4 +66,5 @@ public abstract class Pessoa extends AbstractEntity {
         super(id);
         this.nome = nome;
     }
+
 }

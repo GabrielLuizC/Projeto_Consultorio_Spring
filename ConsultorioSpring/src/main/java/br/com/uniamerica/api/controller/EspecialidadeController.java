@@ -1,8 +1,7 @@
 package br.com.uniamerica.api.controller;
 
 import br.com.uniamerica.api.entity.Especialidade;
-import br.com.uniamerica.api.repository.EspecialidadeRepository;
-import br.com.uniamerica.api.services.EspecialidadeService;
+import br.com.uniamerica.api.service.EspecialidadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,15 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 @RequestMapping("/api/especialidades")
 public class EspecialidadeController {
 
     @Autowired
     private EspecialidadeService especialidadeService;
-
-    @Autowired
-    private EspecialidadeRepository especialidadeRepository;
 
     @GetMapping("/{idEspecialidade}")
     public ResponseEntity<Especialidade> findById(

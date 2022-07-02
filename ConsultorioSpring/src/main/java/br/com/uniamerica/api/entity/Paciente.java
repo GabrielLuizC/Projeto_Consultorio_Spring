@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pacientes", schema = "public")
-public class Paciente extends Pessoa {
+public class Paciente extends Pessoa implements Serializable {
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
@@ -27,4 +28,5 @@ public class Paciente extends Pessoa {
     @JoinColumn(name = "id_convenio")
     @ManyToOne(fetch = FetchType.EAGER)
     private Convenio convenio;
+
 }

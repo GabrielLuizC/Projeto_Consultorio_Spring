@@ -24,7 +24,7 @@ public class Historico extends AbstractEntity {
     private String observacao;
 
     @Getter @Setter
-    @JoinColumn(name = "id_secretaria")
+    @JoinColumn(name = "id_secretatia")
     @ManyToOne(fetch = FetchType.LAZY)
     private Secretaria secretaria;
 
@@ -37,4 +37,5 @@ public class Historico extends AbstractEntity {
     @JoinColumn(name = "id_agenda", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Agenda agenda;
+
 }

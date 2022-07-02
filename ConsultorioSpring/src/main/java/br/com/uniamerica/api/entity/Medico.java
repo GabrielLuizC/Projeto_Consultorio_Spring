@@ -1,8 +1,6 @@
 package br.com.uniamerica.api.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -33,11 +31,19 @@ public class Medico extends Pessoa {
 
     @Getter @Setter
     @JoinColumn(name = "id_especialidade")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Especialidade especialidade;
 
+    /**
+     * @see Pessoa#Pessoa(Long, String)
+     *
+     * @param id
+     * @param nome
+     * @param crm
+     */
     public Medico(Long id, String nome, String crm){
         super(id, nome);
         this.crm = crm;
     }
+
 }

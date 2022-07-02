@@ -16,11 +16,11 @@ public class Agenda extends AbstractEntity {
     private StatusAgenda status;
 
     @Getter @Setter
-    @Column(name = "data_de", nullable = false)
+    @Column(name = "dataDe", nullable = false)
     private LocalDateTime dataDe;
 
     @Getter @Setter
-    @Column(name = "data_ate", nullable = false)
+    @Column(name = "dataAte", nullable = false)
     private LocalDateTime dataAte;
 
     @Getter @Setter
@@ -36,4 +36,9 @@ public class Agenda extends AbstractEntity {
     @JoinColumn(name = "id_medico", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Medico medico;
+
+    @Getter @Setter
+    @JoinColumn(name = "id_secretaria", nullable = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Secretaria secretaria;
 }
